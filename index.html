@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الفيديو الجديدة</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#" onclick="showPage('home')">الرئيسية</a>
+        <a href="#" onclick="showPage('profile')">الصفحة الشخصية</a>
+        <a href="#" onclick="showPage('privacy')">سياسة الخصوصية</a>
+        <a href="#" onclick="showPage('terms')">شروط الاستخدام</a>
+        <a href="#" onclick="showPage('partnerships')">الشراكات</a>
+        <a href="#" id="devPageLink" onclick="showPage('developer')" style="display:none;">صفحة المطور</a>
+        <button id="loginBtn" onclick="signInWithGoogle()">تسجيل الدخول عبر Google</button>
+        <button id="logoutBtn" onclick="signOut()" style="display:none;">تسجيل الخروج</button>
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="ar">العربية</option>
+            <option value="en">English</option>
+        </select>
+        <button id="themeToggle" onclick="toggleTheme()">تبديل الوضع</button>
+    </div>
+
+    <div id="home" class="page active">
+        <h2>منصة الفيديو الجديدة</h2>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('short')">فيديوهات قصيرة</button>
+            <button class="tab-btn" onclick="switchTab('long')">فيديوهات طويلة</button>
+        </div>
+        <div class="controls">
+            <span id="usernameDisplay">اسم المستخدم: مستخدم</span>
+            <input type="file" id="videoUpload" accept="video/*" onchange="previewVideo()">
+            <video id="videoPreview" controls style="display:none; max-width: 300px; margin: 10px;"></video>
+            <select id="category">
+                <option value="قصير">قصير</option>
+                <option value="متوسط">متوسط</option>
+                <option value="طويل">طويل</option>
+            </select>
+            <button onclick="uploadVideo()">رفع الفيديو</button>
+            <span id="coinBalance">رصيدك: 0 عملة 🪙</span>
+            <input type="text" id="searchInput" placeholder="ابحث عن فيديو بالفئة أو العنوان" style="width: 200px;">
+            <button onclick="searchVideos()">بحث</button>
+        </div>
+        <div class="video-container" id="videos-list"></div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
